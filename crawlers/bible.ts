@@ -47,6 +47,7 @@ async function main() {
 
   process.on('SIGINT', async function () {
     const endTime = new Date();
+    const time = endTime.getTime();
     const durationInSeconds = (endTime.getTime() - startTime.getTime()) / 1000;
     saveJsonFile(`bible-incomplete-${time}.json`, bible);
     saveJsonFile(`info-${time}.json`, {
@@ -62,7 +63,6 @@ async function main() {
       const content = await getPageContent(page);
       const nextPageLink = await getNextPageLink(page);
       bible[content.title] = content;
-      // if (Object.keys(bible).length === 10) break; // break after n chapters
       if (nextPageLink === initialPageLink) break;
       console.log(`Navegando para ${nextPageLink}`);
       await page.goto(nextPageLink);
