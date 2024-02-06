@@ -8,7 +8,7 @@ async function getPageContent(page: Page) {
     (h1) => {
       h1.children?.[0]?.remove?.();
       const titleText = h1.textContent;
-      return titleText.trim();
+      return titleText?.trim();
     }
   );
 
